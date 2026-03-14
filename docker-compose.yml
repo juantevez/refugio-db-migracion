@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:15-alpine
+    restart: unless-stopped
     container_name: shelter_db
     environment:
       POSTGRES_USER: shelter_user
@@ -28,5 +29,6 @@ services:
       -url=jdbc:postgresql://db:5432/shelter_db 
       -user=shelter_user 
       -password=shelter_password 
+      -schemas=animal_management,adoptions_donations,public
       -connectRetries=60 
       migrate
